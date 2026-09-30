@@ -66,7 +66,6 @@ main:has(> .auth) {
 
 .auth-ornament {
   position: absolute;
-  width: min(65%, 560px);
   height: auto;
   pointer-events: none;
   user-select: none;
@@ -75,11 +74,13 @@ main:has(> .auth) {
 .auth-ornament-top {
   top: 0;
   right: 0;
+  width: min(65%, 360px);
 }
 
 .auth-ornament-bottom {
   bottom: 0;
-  left: 0;
+  left: max(-28%, -150px);
+  width: min(98%, 528px);
 }
 
 .auth-form {
