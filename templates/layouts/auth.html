@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block content %}
+  <div class="auth">
+    <div
+        class="auth-hero"
+        style="--auth-pattern: url('{{ url_for('views.themes', path='img/adikara/pattern-circle.svg') }}')"
+    >
+      <a href="{{ url_for('views.static_html', route='/') }}">
+        <img
+            class="auth-logo"
+            src="{{ url_for('views.themes', path='img/adikara/adikara-logo-white.svg') }}"
+            alt="{{ Configs.ctf_name }}"
+        >
+      </a>
+
+      <div class="auth-hero-content">
+        <p class="auth-eyebrow">
+          {% trans %}Competition Platform{% endtrans %}
+        </p>
+        <h1 class="auth-title">
+          {% trans %}Cyber Security Competition{% endtrans %}
+        </h1>
+        <p class="auth-lead">
+          {% trans %}Solve Challenges, Capture The Flags, And Watch Your Team Climb The Scoreboard.{% endtrans %}
+        </p>
+      </div>
+    </div>
+
+    <div class="auth-panel">
+      <img
+          class="auth-ornament auth-ornament-top"
+          src="{{ url_for('views.themes', path='img/adikara/ornament-top.svg') }}"
+          alt=""
+      >
+      <img
+          class="auth-ornament auth-ornament-bottom"
+          src="{{ url_for('views.themes', path='img/adikara/ornament-bottom.svg') }}"
+          alt=""
+      >
+
+      <div class="auth-form">
+        {% block auth %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

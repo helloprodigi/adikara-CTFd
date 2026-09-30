@@ -24,19 +24,11 @@ export default defineConfig({
               dest: "static/webfonts",
             },
             {
-              src: "./node_modules/@fontsource/lato/files/**/*400*-normal*",
+              src: "./node_modules/@fontsource/google-sans/files/google-sans-latin-*-normal*",
               dest: "static/webfonts",
             },
             {
-              src: "./node_modules/@fontsource/lato/files/**/*700*-normal*",
-              dest: "static/webfonts",
-            },
-            {
-              src: "./node_modules/@fontsource/raleway/files/**/*400*-normal*",
-              dest: "static/webfonts",
-            },
-            {
-              src: "./assets/img/**",
+              src: "./assets/img/*",
               dest: "static/img",
             },
             {
