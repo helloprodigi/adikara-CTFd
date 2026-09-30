@@ -3,6 +3,9 @@
 {% block content %}
   <div class="jumbotron">
     <div class="container">
+      <p class="jumbotron-eyebrow">
+        {% trans %}Capture The Flag{% endtrans %}
+      </p>
       <h1>
         {% trans %}Challenges{% endtrans %}
       </h1>
@@ -16,9 +19,9 @@
       </div>
     </div>
 
-    <div 
-      x-data="ChallengeBoard" 
-      @load-challenges.window="loadChallenges()" 
+    <div
+      x-data="ChallengeBoard"
+      @load-challenges.window="loadChallenges()"
       @load-challenge.window="loadChallenge($event.detail)"
     >
       <div
@@ -34,30 +37,56 @@
         </div>
       </div>
 
-      <div x-show="loaded">
+      <div x-show="loaded" x-data="{ filter: null }">
+        <div class="challenge-filters-wrapper">
+          <div class="challenge-filters" role="tablist">
+            <button class="challenge-filter" :class="{ 'active': filter === null }" type="button" @click="filter = null">
+              {% trans %}All{% endtrans %}
+            </button>
+            <template x-for="category in getCategories()" :key="category">
+              <button class="challenge-filter" :class="{ 'active': filter === category }" type="button" @click="filter = category" x-text="category"></button>
+            </template>
+          </div>
+        </div>
+
         <template x-for="(category, idx) in getCategories()" :key="idx">
-          <div class="pt-5">
+          <div class="challenge-category pt-4" x-show="filter === null || filter === category">
             <div class="category-header mb-3">
               <h3 x-text="category"></h3>
+              <span class="category-count">
+                <span x-text="getChallenges(category).filter(c => c.solved_by_me).length"></span>/<span x-text="getChallenges(category).length"></span>
+              </span>
             </div>
 
             <div class="category-challenges d-flex flex-column">
-              <div class="challenges-row row">
+              <div class="challenges-row row g-4">
                 <template x-for="(c, idx) in getChallenges(category)" :key="c.id">
-                  <div class="col-sm-6 col-md-4 col-lg-3 my-3">
+                  <div class="col-sm-6 col-lg-4 col-xl-3">
                     <button
-                        class="challenge-button btn btn-dark w-100 h-100"
+                        class="challenge-button w-100 h-100"
                         :class="[
                           c.solved_by_me ? 'challenge-solved' : '',
                           ...c.tags.map((tag) => `tag-${tag.value.replace(/ /g, '-')}`),
                         ];"
-                        :value="c.id" @click="loadChallenge(c.id)"
+                        :value="c.id" :title="c.name" @click="loadChallenge(c.id)"
                     >
-
-                      <div class="challenge-inner my-3">
-                        <p x-text="c.name"></p>
-                        <span x-text="c.value"></span>
-                      </div>
+                      <span class="challenge-inner">
+                        <span class="challenge-card-category" x-text="c.category"></span>
+                        <span class="challenge-card-name" x-text="c.name"></span>
+                        <span class="challenge-card-meta">
+                          <span class="challenge-card-points">
+                            <strong x-text="c.value"></strong>
+                            {% trans %}pts{% endtrans %}
+                          </span>
+                          <span class="challenge-card-solves" x-show="c.solves !== null">
+                            <i class="fas fa-users"></i>
+                            <span x-text="c.solves"></span>
+                          </span>
+                        </span>
+                      </span>
+                      <span class="challenge-card-check" x-show="c.solved_by_me">
+                        <i class="fas fa-check"></i>
+                      </span>
                     </button>
                   </div>
                 </template>
