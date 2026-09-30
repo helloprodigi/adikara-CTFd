@@ -1,0 +1,33 @@
+@use "../utils/tokens";
+
+.form-control:focus,
+.form-control[placeholder]:not(:placeholder-shown) {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--bs-body-bg), var(--bs-body-bg)) padding-box,
+    tokens.$adikara-border-gradient border-box;
+  box-shadow: none;
+}
+
+.input-group:has(> .input-group-text) {
+  border: var(--bs-border-width) solid transparent;
+  border-radius: var(--bs-border-radius);
+  background-color: var(--bs-tertiary-bg);
+
+  > .form-control,
+  > .input-group-text {
+    border: 0;
+    background: transparent;
+  }
+
+  > .input-group-text {
+    color: var(--bs-secondary-color);
+  }
+
+  &:focus-within,
+  &:has(> .form-control[placeholder]:not(:placeholder-shown)) {
+    background:
+      linear-gradient(var(--bs-body-bg), var(--bs-body-bg)) padding-box,
+      tokens.$adikara-border-gradient border-box;
+  }
+}

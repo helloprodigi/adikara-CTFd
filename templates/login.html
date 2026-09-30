@@ -28,7 +28,7 @@
           <span class="input-group-text">
             <i class="fas fa-lock"></i>
           </span>
-          {{ form.password(class="form-control", value=password, autocomplete="current-password", **{":type": "visible ? 'text' : 'password'"}) }}
+          {{ form.password(class="form-control", value=password, autocomplete="current-password", placeholder="••••••••", **{":type": "visible ? 'text' : 'password'"}) }}
           <button class="input-group-text" type="button" @click="visible = !visible" aria-label="{% trans %}Show password{% endtrans %}">
             <i class="fas" :class="visible ? 'fa-eye-slash' : 'fa-eye'"></i>
           </button>

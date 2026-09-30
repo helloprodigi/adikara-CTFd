@@ -21,7 +21,7 @@
           <span class="input-group-text">
             <i class="fas fa-user"></i>
           </span>
-          {{ form.name(class="form-control", value=name, autocomplete="username") }}
+          {{ form.name(class="form-control", value=name, autocomplete="username", placeholder=_("Username")) }}
         </div>
         <small class="form-text text-muted">
           {% trans %}Your username on the site{% endtrans %}
@@ -47,7 +47,7 @@
           <span class="input-group-text">
             <i class="fas fa-lock"></i>
           </span>
-          {{ form.password(class="form-control", value=password, autocomplete="new-password", **{":type": "visible ? 'text' : 'password'"}) }}
+          {{ form.password(class="form-control", value=password, autocomplete="new-password", placeholder="••••••••", **{":type": "visible ? 'text' : 'password'"}) }}
           <button class="input-group-text" type="button" @click="visible = !visible" aria-label="{% trans %}Show password{% endtrans %}">
             <i class="fas" :class="visible ? 'fa-eye-slash' : 'fa-eye'"></i>
           </button>
