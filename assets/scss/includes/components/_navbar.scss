@@ -1,0 +1,131 @@
+@use "../utils/tokens";
+
+.adikara-navbar {
+  --bs-navbar-padding-y: 0.75rem;
+  --bs-navbar-color: var(--bs-body-color);
+  --bs-navbar-hover-color: #{tokens.$adikara-red};
+  --bs-navbar-active-color: #{tokens.$adikara-red};
+  --bs-navbar-toggler-border-color: transparent;
+  background-color: var(--bs-body-bg);
+  border-bottom: 1px solid var(--bs-border-color-translucent);
+
+  .navbar-logo {
+    width: auto;
+    height: 44px;
+  }
+
+  .navbar-icon {
+    width: auto;
+    height: 40px;
+  }
+
+  .nav-link {
+    position: relative;
+    font-weight: 500;
+  }
+}
+
+.navbar-action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  font-size: 1.125rem;
+  color: var(--bs-secondary-color);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+
+  &:hover,
+  &:focus-visible,
+  &[aria-expanded="true"] {
+    color: tokens.$adikara-red;
+    background-color: var(--bs-tertiary-bg);
+  }
+}
+
+.navbar-badge {
+  position: absolute;
+  top: 0.125rem;
+  right: 0;
+  font-size: 0.625rem;
+}
+
+.navbar-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 15rem;
+  padding: 0.25rem 0.625rem 0.25rem 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--bs-body-color);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  transition: background-color 0.15s ease-in-out;
+
+  &:hover,
+  &:focus-visible,
+  &[aria-expanded="true"] {
+    background-color: var(--bs-tertiary-bg);
+  }
+}
+
+.navbar-avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: tokens.$adikara-red;
+  border-radius: 50%;
+}
+
+@media (min-width: 992px) {
+  .adikara-navbar {
+    .navbar-nav {
+      gap: 2rem;
+    }
+
+    .nav-link {
+      padding-right: 0;
+      padding-left: 0;
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0.125rem;
+        left: 0;
+        height: 2px;
+        border-radius: 2px;
+        background: tokens.$adikara-gradient;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      &:hover::after,
+      &.active::after {
+        transform: scaleX(1);
+      }
+
+      &.active {
+        color: transparent;
+        background: tokens.$adikara-gradient;
+        background-clip: text;
+      }
+    }
+  }
+}

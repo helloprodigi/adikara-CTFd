@@ -1,7 +1,6 @@
 @use "../utils/tokens";
 
 main:has(> .auth) {
-  padding-top: 0;
   margin-bottom: 0;
 }
 
