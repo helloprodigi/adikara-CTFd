@@ -1,7 +1,5 @@
 import Alpine from "alpinejs";
 import CTFd from "./index";
-import { getOption } from "./utils/graphs/echarts/scoreboard";
-import { embed } from "./utils/graphs/echarts";
 
 window.Alpine = Alpine;
 window.CTFd = CTFd;
@@ -9,34 +7,24 @@ window.CTFd = CTFd;
 // Default scoreboard polling interval to every 5 minutes
 const scoreboardUpdateInterval = window.scoreboardUpdateInterval || 300000;
 
-Alpine.data("ScoreboardDetail", () => ({
-  data: {},
-  show: true,
-  activeBracket: null,
-
-  async update() {
-    this.data = await CTFd.pages.scoreboard.getScoreboardDetail(10, this.activeBracket);
-
-    let optionMerge = window.scoreboardChartOptions;
-    let option = getOption(CTFd.config.userMode, this.data, optionMerge);
-
-    embed(this.$refs.scoregraph, option);
-    this.show = Object.keys(this.data).length > 0;
-  },
-
-  async init() {
-    this.update();
-
-    setInterval(() => {
-      this.update();
-    }, scoreboardUpdateInterval);
-  },
-}));
-
 Alpine.data("ScoreboardList", () => ({
   standings: [],
   brackets: [],
   activeBracket: null,
+
+  getStandings() {
+    return this.standings.filter(i =>
+      this.activeBracket ? i.bracket_id == this.activeBracket : true,
+    );
+  },
+
+  getMine() {
+    const accountId =
+      CTFd.config.userMode === "teams" ? window.init.teamId : window.init.userId;
+    const standings = this.getStandings();
+    const index = standings.findIndex(i => i.account_id == accountId);
+    return index >= 0 ? { ...standings[index], place: index + 1 } : null;
+  },
 
   async update() {
     this.brackets = await CTFd.pages.scoreboard.getBrackets(CTFd.config.userMode);
@@ -44,10 +32,6 @@ Alpine.data("ScoreboardList", () => ({
   },
 
   async init() {
-    this.$watch("activeBracket", value => {
-      this.$dispatch("bracket-change", value);
-    });
-
     this.update();
 
     setInterval(() => {

@@ -38,13 +38,13 @@
       </div>
 
       <div x-show="loaded" x-data="{ filter: null }">
-        <div class="challenge-filters-wrapper">
-          <div class="challenge-filters" role="tablist">
-            <button class="challenge-filter" :class="{ 'active': filter === null }" type="button" @click="filter = null">
+        <div class="pill-tabs-wrapper">
+          <div class="pill-tabs" role="tablist">
+            <button class="pill-tab" :class="{ 'active': filter === null }" type="button" @click="filter = null">
               {% trans %}All{% endtrans %}
             </button>
             <template x-for="category in getCategories()" :key="category">
-              <button class="challenge-filter" :class="{ 'active': filter === category }" type="button" @click="filter = category" x-text="category"></button>
+              <button class="pill-tab" :class="{ 'active': filter === category }" type="button" @click="filter = category" x-text="category"></button>
             </template>
           </div>
         </div>

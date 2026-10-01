@@ -1,63 +1,91 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="jumbotron">
+  <div
+      class="leaderboard"
+      style="
+        --leaderboard-bg: url('{{ url_for('views.themes', path='img/adikara/leaderboard-bg.svg') }}');
+        --podium-ornament-1: url('{{ url_for('views.themes', path='img/adikara/podium-ornament-1.svg') }}');
+        --podium-ornament-2: url('{{ url_for('views.themes', path='img/adikara/podium-ornament-2.svg') }}');
+        --podium-ornament-3: url('{{ url_for('views.themes', path='img/adikara/podium-ornament-3.svg') }}');
+      "
+  >
+    <div class="jumbotron">
+      <div class="container">
+        <p class="jumbotron-eyebrow">
+          {% trans %}Live Standings{% endtrans %}
+        </p>
+        <h1>
+          {% trans %}Scoreboard{% endtrans %}
+        </h1>
+      </div>
+    </div>
     <div class="container">
-      <h1>
-        {% trans %}Scoreboard{% endtrans %}
-      </h1>
-    </div>
-  </div>
-  <div class="container">
-    {% include "components/errors.html" %}
+      {% include "components/errors.html" %}
 
-    <div id="score-graph" class="align-items-center" :class="{'d-flex': show, 'd-none': !show}" x-data="ScoreboardDetail" x-ref="scoregraph" @bracket-change.window="activeBracket=$event.detail; update();">
-      <div class="col-md-12 text-center">
-        <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
-      </div>
-    </div>
+      <div id="scoreboard" x-data="ScoreboardList">
+        <template x-if="brackets.length && standings.length">
+          <div class="pill-tabs-wrapper mb-4">
+            <nav class="pill-tabs">
+              <button :class="{'pill-tab': true, 'active': !activeBracket}" type="button" @click="activeBracket=null">{% trans %}All{% endtrans %}</button>
+              <template x-for="bracket in brackets">
+                <button :class="{'pill-tab': true, 'active': activeBracket == bracket.id}" type="button" x-text="bracket.name" @click="activeBracket=bracket.id"></button>
+              </template>
+            </nav>
+          </div>
+        </template>
 
-    <div id="scoreboard" class="row" x-data="ScoreboardList">
-      <template x-if="brackets.length && standings.length">
-        <div class="col-md-12 py-3">
-          <nav class="nav nav-pills nav-fill">
-            <button :class="{'nav-link': true, 'active': !activeBracket}" @click="activeBracket=null">{% trans %}All{% endtrans %}</button>
-            <template x-for="bracket in brackets">
-              <button :class="{'nav-link': true, 'active': activeBracket == bracket.id}" x-text="bracket.name" @click="activeBracket=bracket.id"></button>
-            </template>
-          </nav>
+        <div class="scoreboard-podium" x-show="getStandings().length">
+          <template x-for="(standing, index) in getStandings().slice(0, 3)" :key="standing.account_id">
+            <a class="podium-card" :class="`podium-${index + 1}`" :href="standing.account_url">
+              <span class="podium-rank" x-text="index + 1"></span>
+              <span class="podium-name" x-text="standing.name"></span>
+              <template x-if="standing.bracket_name">
+                <span class="scoreboard-bracket" x-text="standing.bracket_name"></span>
+              </template>
+              <strong class="podium-score" x-text="standing.score"></strong>
+              <span class="podium-label">{% trans %}Current Score{% endtrans %}</span>
+            </a>
+          </template>
         </div>
-      </template>
 
-      <div class="col-md-12" x-show="standings.length">
-        <table class="table table-striped align-middle">
-          <thead>
-          <tr>
-            <th style="width: 10px">{% trans %}Place{% endtrans %}</th>
-            <th class="text-start ps-3">{{ get_mode_as_word(capitalize=True) }}</th>
-            <th>{% trans %}Score{% endtrans %}</th>
-          </tr>
-          </thead>
+        <div class="scoreboard-list" x-show="getStandings().length > 3">
+          <template x-for="(standing, index) in getStandings().slice(3)" :key="standing.account_id">
+            <a class="scoreboard-row" :href="standing.account_url">
+              <span class="scoreboard-rank" x-text="index + 4"></span>
+              <span class="scoreboard-info">
+                <span class="scoreboard-name" x-text="standing.name"></span>
+                <template x-if="standing.bracket_name">
+                  <span class="scoreboard-bracket" x-text="standing.bracket_name"></span>
+                </template>
+              </span>
+              <span class="scoreboard-score">
+                <strong x-text="standing.score"></strong>
+                <span>{% trans %}Current Score{% endtrans %}</span>
+              </span>
+            </a>
+          </template>
+        </div>
 
-          <tbody>
-            <template x-for="(standing, index) in standings.filter(i => activeBracket ? i.bracket_id==activeBracket : true)">
-              <tr>
-                <th scope="row" class="text-center" x-text="index + 1"></th>
-                <td class="text-start">
-                  <a :href="standing.account_url" x-text="standing.name"></a>
-                  <template x-if="standing.bracket_name">
-                    <span class="badge bg-secondary ms-2" x-text="standing.bracket_name"></span>
-                  </template>
-                </td>
-                <td x-text="standing.score"></td>
-              </tr>
-            </template>
-          </tbody>
-        </table>
-      </div>
+        <div class="scoreboard-empty" x-show="! standings.length">
+          <i class="fas fa-trophy"></i>
+          <h3>{% trans %}Scoreboard is empty{% endtrans %}</h3>
+        </div>
 
-      <div class="col-md-12" x-show="! standings.length">
-        <h3 class="text-center text-muted">{% trans %}Scoreboard is empty{% endtrans %}</h3>
+        <template x-if="getMine()">
+          <div class="scoreboard-mine">
+            <a class="scoreboard-row" :href="getMine().account_url">
+              <span class="scoreboard-rank" x-text="getMine().place"></span>
+              <span class="scoreboard-info">
+                <span class="scoreboard-name" x-text="getMine().name"></span>
+              </span>
+              <span class="scoreboard-score">
+                <strong x-text="getMine().score"></strong>
+                <span>{% trans %}Current Score{% endtrans %}</span>
+              </span>
+            </a>
+          </div>
+        </template>
       </div>
     </div>
   </div>

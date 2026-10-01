@@ -1,5 +1,19 @@
 /* Table styles
 -------------------------------------------------- */
+@use "../utils/tokens";
+
+.table {
+  --bs-table-striped-bg: #{rgba(tokens.$adikara-red, 0.03)};
+  --bs-table-hover-bg: #{rgba(tokens.$adikara-red, 0.05)};
+
+  > thead th {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--bs-secondary-color);
+    text-transform: uppercase;
+  }
+}
 
 // Center text in table cells, except the first cell
 .table tr > :not(:first-child) {

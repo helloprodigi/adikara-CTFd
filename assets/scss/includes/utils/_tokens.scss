@@ -21,4 +21,10 @@ $adikara-font-family: (
 $adikara-gradient: linear-gradient(90deg, $adikara-bright-red, $adikara-yellow);
 $adikara-border-gradient: linear-gradient(90deg, $adikara-yellow, $adikara-red);
 $adikara-tab-gradient: linear-gradient(100deg, #e9231e 0%, #ff9b00 100%);
-$adikara-badge-gradient: linear-gradient(145deg, #e51f18 5%, #ff7800 62%, #ffc729 100%);
+$adikara-badge-gradient: linear-gradient(60deg, #c9070f 10%, #f36b0a 55%, #ffc72c 100%);
+$adikara-mine-gradient: linear-gradient(
+  90deg,
+  #ffc729 0%,
+  #f36b0a 50%,
+  $adikara-red 100%
+);

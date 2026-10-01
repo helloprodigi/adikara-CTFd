@@ -13,49 +13,6 @@
   }
 }
 
-.challenge-filters-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.challenge-filters {
-  display: inline-flex;
-  gap: 1rem;
-  max-width: 100%;
-  padding: 0.5rem 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.challenge-filter {
-  flex: none;
-  padding: 0.625rem 1.5rem;
-  font-size: clamp(0.875rem, 1.5vw, 1rem);
-  color: var(--bs-secondary-color);
-  white-space: nowrap;
-  background: transparent;
-  border: 0;
-  border-radius: 999px;
-  transition:
-    color 0.18s ease-in-out,
-    box-shadow 0.2s ease-in-out;
-
-  &:hover,
-  &:focus-visible {
-    color: tokens.$adikara-red;
-  }
-
-  &.active {
-    color: #fff;
-    background: tokens.$adikara-tab-gradient;
-    box-shadow: 0 6px 16px -8px rgba(tokens.$adikara-red, 0.6);
-  }
-}
-
 .category-header {
   display: flex;
   align-items: center;
