@@ -1,9 +1,67 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="container page-content py-4">
-    {{ content | safe }}
-  </div>
+  {% if request.path == url_for('views.static_html', route='/') %}
+    <section
+        class="hero"
+        x-data
+        @scroll.window.passive="$el.style.setProperty('--hero-parallax', window.scrollY + 'px')"
+        style="
+          --hero-pattern: url('{{ url_for('views.themes', path='img/adikara/hero-pattern.svg') }}');
+          --hero-decor: url('{{ url_for('views.themes', path='img/adikara/hero-decor.svg') }}');
+        "
+    >
+      <div class="hero-content container">
+        <div class="hero-partners">
+          <img
+              src="{{ url_for('views.themes', path='img/adikara/informatics-logo.svg') }}"
+              alt="Fakultas Informatika"
+          >
+          <img
+              src="{{ url_for('views.themes', path='img/adikara/prodigi-logo.svg') }}"
+              alt="PRODIGI"
+          >
+        </div>
+
+        <img
+            class="hero-icon"
+            src="{{ url_for('views.themes', path='img/adikara/adikara-icon-hero.svg') }}"
+            alt=""
+        >
+
+        <h1 class="hero-title">
+          ADIKARA
+          <span>2026</span>
+        </h1>
+        <p class="hero-subtitle">
+          {% trans %}Cyber Security Competition · Capture The Flag{% endtrans %}
+        </p>
+
+        <div class="hero-actions">
+          {% if authed() %}
+            <a class="btn btn-primary" href="{{ url_for('challenges.listing') }}">
+              {% trans %}Start Challenges{% endtrans %}
+            </a>
+          {% else %}
+            {% if registration_visible() %}
+              <a class="btn btn-primary" href="{{ url_for('auth.register') }}">
+                {% trans %}Register{% endtrans %}
+              </a>
+            {% endif %}
+            <a class="btn btn-outline-primary" href="{{ url_for('auth.login') }}">
+              {% trans %}Login{% endtrans %}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if content %}
+    <div class="container page-content py-4">
+      {{ content | safe }}
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block scripts %}

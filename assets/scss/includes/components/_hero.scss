@@ -1,0 +1,224 @@
+@use "../utils/tokens";
+
+$hero-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+@keyframes heroDecorInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: var(--hero-decor-opacity, 1);
+    transform: translateX(0);
+  }
+}
+
+@keyframes heroDecorInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scaleX(-1);
+  }
+
+  to {
+    opacity: var(--hero-decor-opacity, 1);
+    transform: translateX(0) scaleX(-1);
+  }
+}
+
+@keyframes heroWingFloatLeft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes heroWingFloatRight {
+  0%,
+  100% {
+    transform: translateY(0) scaleX(-1);
+  }
+
+  50% {
+    transform: translateY(-14px) scaleX(-1);
+  }
+}
+
+@keyframes heroIconReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.65);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--hero-rise, 22px));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero {
+  --hero-decor-width: min(31vw, 400px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 4.9375rem);
+  padding: 3rem 0 4rem;
+  overflow: hidden;
+  background: var(--hero-pattern) no-repeat center bottom / cover;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: var(--hero-decor-width);
+    aspect-ratio: 448 / 590;
+    margin-top: calc(var(--hero-decor-width) * -590 / 448 / 2);
+    background: var(--hero-decor) no-repeat center / contain;
+    opacity: var(--hero-decor-opacity, 1);
+    pointer-events: none;
+  }
+
+  &::before {
+    left: -2rem;
+    translate: 0 calc(var(--hero-parallax, 0px) * 0.16);
+    animation:
+      heroDecorInLeft 1.2s $hero-ease 0.1s both,
+      heroWingFloatLeft 4.5s ease-in-out 1.4s infinite;
+  }
+
+  &::after {
+    right: -2rem;
+    transform: scaleX(-1);
+    translate: 0 calc(var(--hero-parallax, 0px) * 0.24);
+    animation:
+      heroDecorInRight 1.2s $hero-ease 0.1s both,
+      heroWingFloatRight 4.5s ease-in-out 1.4s infinite;
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.hero-partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+
+  img {
+    --hero-rise: 14px;
+    width: auto;
+    height: 2.5rem;
+    animation: heroRise 0.65s $hero-ease 0.8s both;
+
+    &:last-child {
+      animation-delay: 1s;
+    }
+  }
+}
+
+.hero-icon {
+  width: auto;
+  height: clamp(8rem, 18vh, 12rem);
+  animation: heroIconReveal 0.75s $hero-ease 0.5s both;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: clamp(3.25rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  color: tokens.$adikara-dark-red;
+  animation: heroRise 0.75s $hero-ease 1.2s both;
+
+  span {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.55em;
+    line-height: 1.15;
+  }
+}
+
+.hero-subtitle {
+  max-width: 38rem;
+  margin: 0;
+  font-size: clamp(0.9375rem, 1.6vw, 1.125rem);
+  line-height: 1.4;
+  color: var(--bs-secondary-color);
+  animation: heroRise 0.75s $hero-ease 1.35s both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  animation: heroRise 0.75s $hero-ease 1.5s both;
+
+  .btn {
+    min-width: 12rem;
+    border-radius: 999px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero {
+    --hero-decor-width: min(30vw, 150px);
+    --hero-decor-opacity: 0.25;
+    min-height: auto;
+    padding: 2.5rem 0 3rem;
+
+    &::before,
+    &::after {
+      top: 1.5rem;
+      margin-top: 0;
+    }
+  }
+
+  .hero-partners img {
+    height: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .hero::after,
+  .hero-partners img,
+  .hero-icon,
+  .hero-title,
+  .hero-subtitle,
+  .hero-actions {
+    animation: none;
+  }
+
+  .hero::before,
+  .hero::after {
+    translate: none;
+  }
+}
