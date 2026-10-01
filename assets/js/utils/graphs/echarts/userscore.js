@@ -1,11 +1,14 @@
-import { colorHash } from "@ctfdio/ctfd-js/ui";
 import { cumulativeSum } from "../../math";
 import { mergeObjects } from "../../objects";
 import dayjs from "dayjs";
 
 export function getOption(id, name, solves, awards, optionMerge) {
   let option = {
+    textStyle: {
+      fontFamily: "Google Sans, system-ui, sans-serif",
+    },
     title: {
+      show: false,
       left: "center",
       text: "Score over Time",
     },
@@ -89,12 +92,12 @@ export function getOption(id, name, solves, awards, optionMerge) {
     },
     areaStyle: {
       normal: {
-        color: colorHash(name + id),
+        color: "rgba(201, 7, 15, 0.08)",
       },
     },
     itemStyle: {
       normal: {
-        color: colorHash(name + id),
+        color: "#c9070f",
       },
     },
     data: cumulativeSum(scores),

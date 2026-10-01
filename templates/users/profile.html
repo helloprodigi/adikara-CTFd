@@ -1,0 +1,205 @@
+<div class="container">
+  <div class="profile-banner">
+    <span class="profile-avatar">
+      {{ user.name.split()[:2] | map("first") | join | upper }}
+    </span>
+
+    <div class="profile-identity">
+      <h1 class="profile-name">{{ user.name }}</h1>
+
+      {% if user.affiliation or user.country %}
+        <p class="profile-origin">
+          {% if user.country %}
+            <i class="flag-{{ user.country.lower() }}"></i>
+          {% endif %}
+          {% if user.affiliation %}
+            <span>{{ user.affiliation }}</span>
+          {% endif %}
+          {% if user.affiliation and user.country %}
+            <span class="profile-origin-separator">·</span>
+          {% endif %}
+          {% if user.country %}
+            <span>{{ lookup_country_code(user.country) }}</span>
+          {% endif %}
+        </p>
+      {% endif %}
+
+      {% if user.website %}
+        <a class="profile-website" href="{{ user.website }}" target="_blank" rel="noopener" title="{{ user.website }}">
+          <i class="fas fa-link"></i>
+          {{ user.website }}
+        </a>
+      {% endif %}
+
+      {% if user.team_id or user.oauth_id or user.bracket_id %}
+        <div class="profile-meta">
+          {% if user.team_id %}
+            <a class="profile-chip" href="{{ url_for('teams.public', team_id=user.team_id) }}">
+              <i class="fas fa-users"></i>
+              {{ user.team.name }}
+            </a>
+          {% endif %}
+
+          {% if user.oauth_id %}
+            <a class="profile-chip" href="https://majorleaguecyber.org/u/{{ user.name }}">
+              <i class="fas fa-certificate"></i>
+              {% trans %}Official{% endtrans %}
+            </a>
+          {% endif %}
+
+          {% if user.bracket_id %}
+            <span class="profile-chip">
+              <i class="fas fa-layer-group"></i>
+              {{ user.bracket.name }}
+            </span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if user.fields %}
+        <dl class="profile-fields">
+          {% for field in user.fields %}
+            <div>
+              <dt>{{ field.name }}</dt>
+              <dd>{{ field.value }}</dd>
+            </div>
+          {% endfor %}
+        </dl>
+      {% endif %}
+    </div>
+
+    {% if account.place or profile_score is not none %}
+      <div class="profile-standing">
+        {% if account.place %}
+          <div>
+            <span>{% trans %}Place{% endtrans %}</span>
+            <strong>{{ account.place }}</strong>
+          </div>
+        {% endif %}
+
+        {% if profile_score is not none %}
+          <div>
+            <span>{% trans %}Points{% endtrans %}</span>
+            <strong>{{ profile_score }}</strong>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% include "components/errors.html" %}
+
+  {% set solves = user.solves %}
+  {% set awards = user.awards %}
+
+  {% if solves or awards %}
+    <div class="profile-layout" x-data="UserGraphs">
+      <div class="profile-main">
+        <section class="profile-card d-none d-md-block">
+          <h3 class="profile-card-title">{% trans %}Score over Time{% endtrans %}</h3>
+          <div id="score-graph" x-ref="scoregraph" class="w-100 d-flex align-items-center">
+            <div class="text-center w-100">
+              <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
+            </div>
+          </div>
+        </section>
+
+        <section class="profile-card">
+          <h3 class="profile-card-title">{% trans %}Solves{% endtrans %}</h3>
+          <div class="table-responsive">
+            <table class="table profile-table align-middle">
+              <thead>
+              <tr>
+                <th>{% trans %}Challenge{% endtrans %}</th>
+                <th class="d-none d-md-table-cell">{% trans %}Category{% endtrans %}</th>
+                <th>{% trans %}Value{% endtrans %}</th>
+                <th>{% trans %}Time{% endtrans %}</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for solve in solves %}
+                <tr>
+                  <td>
+                    <a href="{{ url_for('challenges.listing') }}#{{ solve.challenge.name }}-{{ solve.challenge.id }}">
+                      {{ solve.challenge.name }}
+                    </a>
+                  </td>
+                  <td class="d-none d-md-table-cell">
+                    <span class="profile-category-chip">{{ solve.challenge.category }}</span>
+                  </td>
+                  <td>{{ solve.challenge.value }}</td>
+                  <td class="solve-time">
+                    <span data-time="{{ solve.date | isoformat }}"></span>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <aside class="profile-side">
+        <section class="profile-card d-none d-md-block">
+          <div class="profile-breakdown-row">
+            <div class="progress">
+              <div class="progress-bar profile-bar-solve" role="progressbar" :style="{ width: `${getSolvePercentage()}%` }"></div>
+              <div class="progress-bar profile-bar-fail" role="progressbar" :style="{ width: `${getFailPercentage()}%` }"></div>
+            </div>
+            <div class="profile-graph-legend">
+              <span>
+                <i class="profile-bar-solve"></i>
+                <small x-text="`Solves (${getSolvePercentage()}%)`"></small>
+              </span>
+              <span>
+                <i class="profile-bar-fail"></i>
+                <small x-text="`Fails (${getFailPercentage()}%)`"></small>
+              </span>
+            </div>
+          </div>
+
+          <template x-for="category in getCategoryBreakdown()" :key="category.name">
+            <div class="profile-breakdown-row">
+              <div class="profile-breakdown-head">
+                <strong x-text="category.name"></strong>
+                <small x-text="`${category.percent}%`"></small>
+              </div>
+              <div class="progress">
+                <div class="progress-bar profile-bar-category" role="progressbar" :style="{ width: `${category.percent}%` }"></div>
+              </div>
+            </div>
+          </template>
+        </section>
+
+        {% if awards %}
+          <section class="profile-card">
+            <h3 class="profile-card-title">{% trans %}Awards{% endtrans %}</h3>
+            <div class="profile-awards">
+              {% for award in awards %}
+                <div class="profile-award">
+                  <span class="profile-award-icon">
+                    <i class="award-icon award-{{ award.icon }}"></i>
+                  </span>
+                  <span class="profile-award-info">
+                    <strong>{{ award.name }}</strong>
+                    {% if award.category %}
+                      <span class="profile-award-category">{{ award.category }}</span>
+                    {% endif %}
+                    {% if award.description %}
+                      <span>{{ award.description }}</span>
+                    {% endif %}
+                  </span>
+                  <span class="profile-award-value">{{ award.value }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          </section>
+        {% endif %}
+      </aside>
+    </div>
+  {% else %}
+    <div class="profile-empty">
+      <h3>{% trans %}No solves yet{% endtrans %}</h3>
+    </div>
+  {% endif %}
+</div>

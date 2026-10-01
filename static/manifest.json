@@ -38,7 +38,7 @@
     ]
   },
   "assets/js/scoreboard.js": {
-    "file": "assets/scoreboard.b981ba64.js",
+    "file": "assets/scoreboard.f9549122.js",
     "src": "assets/js/scoreboard.js",
     "isEntry": true,
     "imports": [
@@ -54,23 +54,23 @@
     ]
   },
   "assets/js/teams/public.js": {
-    "file": "assets/teams_public.c1f933a0.js",
+    "file": "assets/teams_public.23c9daa9.js",
     "src": "assets/js/teams/public.js",
     "isEntry": true,
     "imports": [
       "assets/js/index.js",
-      "_index.fbd178a9.js",
+      "_index.01ab379c.js",
       "_echarts.128204f2.js"
     ]
   },
   "assets/js/teams/private.js": {
-    "file": "assets/teams_private.8ac080a1.js",
+    "file": "assets/teams_private.05079f29.js",
     "src": "assets/js/teams/private.js",
     "isEntry": true,
     "imports": [
       "assets/js/index.js",
       "_clipboard.541d7774.js",
-      "_index.fbd178a9.js",
+      "_index.01ab379c.js",
       "_echarts.128204f2.js"
     ]
   },
@@ -83,22 +83,22 @@
     ]
   },
   "assets/js/users/public.js": {
-    "file": "assets/users_public.74661053.js",
+    "file": "assets/users_public.acfaedc0.js",
     "src": "assets/js/users/public.js",
     "isEntry": true,
     "imports": [
       "assets/js/index.js",
-      "_index.fbd178a9.js",
+      "_index.01ab379c.js",
       "_echarts.128204f2.js"
     ]
   },
   "assets/js/users/private.js": {
-    "file": "assets/users_private.dd38cdb3.js",
+    "file": "assets/users_private.528b0da1.js",
     "src": "assets/js/users/private.js",
     "isEntry": true,
     "imports": [
       "assets/js/index.js",
-      "_index.fbd178a9.js",
+      "_index.01ab379c.js",
       "_echarts.128204f2.js"
     ]
   },
@@ -124,15 +124,15 @@
       "assets/js/index.js"
     ]
   },
-  "_index.fbd178a9.js": {
-    "file": "assets/index.fbd178a9.js",
+  "_index.01ab379c.js": {
+    "file": "assets/index.01ab379c.js",
     "imports": [
       "assets/js/index.js",
       "_echarts.128204f2.js"
     ]
   },
   "assets/scss/main.scss": {
-    "file": "assets/main.018527d2.css",
+    "file": "assets/main.7e5629d2.css",
     "src": "assets/scss/main.scss",
     "isEntry": true
   }

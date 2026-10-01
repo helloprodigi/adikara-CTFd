@@ -1,0 +1,166 @@
+@use "../utils/tokens";
+
+.account-search {
+  display: grid;
+  grid-template-columns: minmax(8rem, 12rem) 1fr auto;
+  gap: 0.75rem;
+  max-width: 56rem;
+  margin: 0 auto 1rem;
+
+  .btn {
+    padding-right: 1.75rem;
+    padding-left: 1.75rem;
+  }
+}
+
+.account-search-result {
+  max-width: 56rem;
+  margin: 0 auto 1rem;
+  font-size: 0.875rem;
+  color: var(--bs-secondary-color);
+  text-align: center;
+
+  span {
+    display: block;
+    margin-top: 0.25rem;
+  }
+}
+
+.account-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.account-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  border: 1px solid rgba(tokens.$adikara-navy, 0.1);
+  border-radius: 1rem;
+  transition:
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.22s ease-in-out,
+    border-color 0.22s ease-in-out;
+}
+
+.account-card:has(.stretched-link:hover),
+.account-card:has(.stretched-link:focus-visible) {
+  border-color: rgba(tokens.$adikara-red, 0.35);
+  box-shadow: 0 12px 30px -10px rgba(tokens.$adikara-red, 0.35);
+  transform: translateY(-3px);
+}
+
+.account-avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fff;
+  background: tokens.$adikara-badge-gradient;
+  border-radius: 50%;
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.account-name {
+  overflow: hidden;
+  color: var(--bs-body-color);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-detail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  overflow: hidden;
+  font-size: 0.8125rem;
+  color: var(--bs-secondary-color);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  .fas {
+    color: tokens.$adikara-red;
+  }
+}
+
+.account-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.account-tag {
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  color: tokens.$adikara-orange-text;
+  background-color: rgba(tokens.$adikara-orange-text, 0.1);
+  border-radius: 999px;
+}
+
+.account-tag-official {
+  position: relative;
+  z-index: 2;
+  color: tokens.$adikara-red;
+  background-color: rgba(tokens.$adikara-red, 0.08);
+}
+
+.account-website {
+  position: relative;
+  z-index: 2;
+  margin-left: auto;
+  color: var(--bs-secondary-color);
+
+  &:hover,
+  &:focus-visible {
+    color: tokens.$adikara-red;
+  }
+}
+
+.account-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+  color: var(--bs-secondary-color);
+
+  .btn {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .form-select {
+    width: auto;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .account-search {
+    grid-template-columns: 1fr;
+  }
+}
