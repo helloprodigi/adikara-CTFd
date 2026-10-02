@@ -123,7 +123,7 @@
             {% with form = Forms.self.TokensForm() %}
               <form method="POST" x-data="TokensForm" @submit.prevent="generateToken()" class="mb-3">
                 <div class="modal fade" tabindex="-1" x-ref="tokenModal">
-                  <div class="modal-dialog modal-lg">
+                  <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title">{% trans %}API Key Generated{% endtrans %}</h5>
@@ -189,7 +189,7 @@
                     class="modal fade" x-ref="confirmModal" tabindex="-1" role="dialog"
                     aria-modal="true"
                 >
-                  <div class="modal-dialog" role="document">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title">{% trans %}Delete Token{% endtrans %}</h5>
@@ -205,7 +205,7 @@
                       </div>
 
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                           No
                         </button>
                         <button

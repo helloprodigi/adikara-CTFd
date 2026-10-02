@@ -1,0 +1,44 @@
+@use "../utils/tokens";
+
+.modal-content:not(.challenge-modal) {
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: 1.25rem;
+  box-shadow: 0 24px 60px rgba(tokens.$adikara-navy, 0.18);
+
+  .modal-header {
+    align-items: flex-start;
+    border: 0;
+
+    p {
+      margin: 0.25rem 0 0;
+      color: var(--bs-secondary-color);
+    }
+  }
+
+  .modal-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  b > label {
+    font-weight: 500;
+  }
+
+  .modal-footer {
+    flex-wrap: nowrap;
+    border: 0;
+
+    > .btn {
+      flex: 1;
+    }
+  }
+}
+
+:where(.modal-content:not(.challenge-modal)) {
+  .form-control,
+  .form-select {
+    background-color: var(--bs-body-bg);
+    border-color: var(--bs-border-color);
+  }
+}

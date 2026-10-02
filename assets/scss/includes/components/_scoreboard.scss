@@ -1,6 +1,7 @@
 @use "../utils/tokens";
 
-.leaderboard {
+.leaderboard,
+.ornament-backdrop {
   position: relative;
   isolation: isolate;
   overflow-x: clip;

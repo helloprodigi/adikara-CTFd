@@ -1,44 +1,146 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="jumbotron">
-    <div class="container">
-      <h1>{% trans %}Team{% endtrans %}</h1>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 offset-md-3 text-center">
-        <p class="h2">{% trans %}Welcome to{% endtrans %} {{ Configs.ctf_name }}!</p>
-        <p>
-          {% trans %}In order to participate you must either join or create a team.{% endtrans %}
+  <div
+      class="ornament-backdrop"
+      style="--leaderboard-bg: url('{{ url_for('views.themes', path='img/adikara/leaderboard-bg.svg') }}');"
+  >
+    <div class="jumbotron">
+      <div class="container">
+        <p class="jumbotron-eyebrow">
+          {% trans %}First Step{% endtrans %}
+        </p>
+        <h1>{% trans %}Build Your Team First{% endtrans %}</h1>
+        <p class="team-enroll-lead">
+          {% trans %}The Cyber Security Competition is a team-based competition. Create a new team or join an existing one to start capturing flags.{% endtrans %}
         </p>
       </div>
     </div>
 
-    {% if integrations.mlc() %}
-      <div class="row">
-        <div class="col-md-6 offset-md-3 text-center">
+    <div class="container">
+      {% if integrations.mlc() %}
+        <div class="team-enroll-official">
           <a class="btn btn-primary w-100" href="{{ url_for('auth.oauth_login') }}">{% trans %}Play with Official Team{% endtrans %}</a>
         </div>
+      {% endif %}
+
+      <div class="team-enroll-grid">
+        <div class="team-enroll-card">
+          <span class="team-enroll-icon team-enroll-icon-primary">
+            <i class="fas fa-user-plus"></i>
+          </span>
+          <h2>
+            {% if integrations.mlc() %}
+              {% trans %}Create Unofficial Team{% endtrans %}
+            {% else %}
+              {% trans %}Create a New Team{% endtrans %}
+            {% endif %}
+          </h2>
+          <p>{% trans %}Start a new team and become its captain.{% endtrans %}</p>
+          <button class="btn btn-primary w-100" type="button" data-bs-toggle="modal" data-bs-target="#create-team-modal">
+            {% trans %}Create Team{% endtrans %}
+          </button>
+        </div>
+
+        <div class="team-enroll-card">
+          <span class="team-enroll-icon">
+            <i class="fas fa-user-lock"></i>
+          </span>
+          <h2>
+            {% if integrations.mlc() %}
+              {% trans %}Join Unofficial Team{% endtrans %}
+            {% else %}
+              {% trans %}Join an Existing Team{% endtrans %}
+            {% endif %}
+          </h2>
+          <p>{% trans %}Enter your team's name and password to join.{% endtrans %}</p>
+          <button class="btn btn-outline-primary w-100" type="button" data-bs-toggle="modal" data-bs-target="#join-team-modal">
+            {% trans %}Join Team{% endtrans %}
+          </button>
+        </div>
       </div>
-      <div class="row">
-        <div class="mt-3 col-md-3 offset-md-3 text-center">
-          <a class="btn btn-outline-info w-100" href="{{ url_for('teams.join') }}">{% trans %}Join Unofficial Team{% endtrans %}</a>
+    </div>
+  </div>
+
+  <div class="modal fade" id="create-team-modal" tabindex="-1" aria-labelledby="create-team-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-title" id="create-team-title">{% trans %}Create a New Team{% endtrans %}</h2>
+            <p>{% trans %}You'll be the team captain. Share your team name and password, or an invite link, with your teammates.{% endtrans %}</p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="mt-3 col-md-3 text-center">
-          <a class="btn btn-outline-info w-100" href="{{ url_for('teams.new') }}">{% trans %}Create Unofficial Team{% endtrans %}</a>
+        <div class="modal-body">
+          {% with form = Forms.teams.TeamRegisterForm() %}
+            {% from "macros/forms.html" import render_extra_fields %}
+            <form method="POST" action="{{ url_for('teams.new') }}">
+              <div class="mb-3">
+                {{ form.name.label(class="form-label", for_="create-team-name") }}
+                {{ form.name(class="form-control", id="create-team-name", placeholder=_("e.g. Root Rangers")) }}
+              </div>
+              <div class="mb-3">
+                {{ form.password.label(class="form-label", for_="create-team-password") }}
+                {{ form.password(class="form-control", id="create-team-password") }}
+              </div>
+
+              {{ render_extra_fields(form.extra) }}
+
+              <ul class="team-info-box">
+                {% if Configs.team_size %}
+                  <li>
+                    <i class="fas fa-users"></i>
+                    {% trans size=Configs.team_size %}Maximum {{ size }} members per team{% endtrans %}
+                  </li>
+                {% endif %}
+                <li>
+                  <i class="fas fa-flag"></i>
+                  {% trans %}All members can submit flags{% endtrans %}
+                </li>
+                <li>
+                  <i class="fas fa-user-shield"></i>
+                  {% trans %}The captain can invite members and edit the team{% endtrans %}
+                </li>
+              </ul>
+
+              {{ form.submit(class="btn btn-primary w-100", value=_("Create Team")) }}
+              {{ form.nonce() }}
+            </form>
+          {% endwith %}
         </div>
       </div>
-    {% else %}
-      <div class="row">
-        <div class="mt-3 col-sm-4 col-md-3 offset-sm-2 offset-md-3 text-center">
-          <a class="btn btn-primary w-100" href="{{ url_for('teams.join') }}">{% trans %}Join Team{% endtrans %}</a>
+    </div>
+  </div>
+
+  <div class="modal fade" id="join-team-modal" tabindex="-1" aria-labelledby="join-team-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-title" id="join-team-title">{% trans %}Join an Existing Team{% endtrans %}</h2>
+            <p>{% trans %}Enter your team's name and password to join.{% endtrans %}</p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="mt-3 col-sm-4 col-md-3 text-center">
-          <a class="btn btn-primary w-100" href="{{ url_for('teams.new') }}">{% trans %}Create Team{% endtrans %}</a>
+        <div class="modal-body">
+          {% with form = Forms.teams.TeamJoinForm() %}
+            <form method="POST" action="{{ url_for('teams.join') }}">
+              <div class="mb-3">
+                {{ form.name.label(class="form-label", for_="join-team-name") }}
+                {{ form.name(class="form-control", id="join-team-name") }}
+              </div>
+              <div class="mb-4">
+                {{ form.password.label(class="form-label", for_="join-team-password") }}
+                {{ form.password(class="form-control", id="join-team-password") }}
+              </div>
+
+              {{ form.submit(class="btn btn-primary w-100", value=_("Join Team")) }}
+              {{ form.nonce() }}
+            </form>
+          {% endwith %}
         </div>
       </div>
-    {% endif %}
+    </div>
   </div>
 {% endblock %}
