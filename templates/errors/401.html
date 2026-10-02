@@ -1,18 +1,9 @@
-{% extends "base.html" %}
+{% extends "errors/error.html" %}
 
-{% block content %}
+{% block error_title %}
+  <h1>{{ error }}</h1>
+{% endblock %}
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="pt-5 mt-5 text-center">
-				<h1>{{ error }}</h1>
-				<hr class="w-50 m-auto">
-				<br/>
-				<h2>{% trans %}401 Unauthorized{% endtrans %}</h2>
-			</div>
-		</div>
-	</div>
-</div>
-
+{% block error_code %}
+  <h2>{% trans %}401 Unauthorized{% endtrans %}</h2>
 {% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div
+      class="ornament-backdrop error-page"
+      style="--leaderboard-bg: url('{{ url_for('views.themes', path='img/adikara/leaderboard-bg.svg') }}');"
+  >
+    <div class="container">
+      {% block error_title %}{% endblock %}
+      <hr>
+      {% block error_code %}{% endblock %}
+    </div>
+  </div>
+{% endblock %}
