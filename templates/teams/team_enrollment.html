@@ -73,6 +73,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          {% if open_modal == "create" %}
+            {% include "components/errors.html" %}
+          {% endif %}
+
           {% with form = Forms.teams.TeamRegisterForm() %}
             {% from "macros/forms.html" import render_extra_fields %}
             <form method="POST" action="{{ url_for('teams.new') }}">
@@ -124,6 +128,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          {% if open_modal == "join" %}
+            {% include "components/errors.html" %}
+          {% endif %}
+
           {% with form = Forms.teams.TeamJoinForm() %}
             <form method="POST" action="{{ url_for('teams.join') }}">
               <div class="mb-3">
@@ -143,4 +151,15 @@
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  {% if open_modal %}
+    <script>
+      window.addEventListener("load", () => {
+        document.querySelector('[data-bs-target="#{{ open_modal }}-team-modal"]').click();
+      });
+    </script>
+  {% endif %}
 {% endblock %}

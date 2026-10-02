@@ -7,14 +7,16 @@
   --adikara-red-text: #{tokens.$adikara-red};
   --adikara-hero-title: #{tokens.$adikara-dark-red};
   --adikara-card-shadow: #{rgba(tokens.$adikara-navy, 0.04)};
+  --adikara-mine-bg: #ffffff;
 }
 
 [data-bs-theme="dark"] {
   --adikara-surface: #{tokens.$adikara-dark-surface};
   --adikara-card-border: #{rgba(#fff, 0.08)};
   --adikara-red-text: #{tokens.$adikara-dark-red-text};
-  --adikara-hero-title: #{tokens.$adikara-bright-red};
+  --adikara-hero-title: #fff;
   --adikara-card-shadow: #{rgba(#000, 0.25)};
+  --adikara-mine-bg: #{tokens.$adikara-dark-raised};
 
   .btn-outline-primary {
     --bs-btn-color: var(--adikara-red-text);

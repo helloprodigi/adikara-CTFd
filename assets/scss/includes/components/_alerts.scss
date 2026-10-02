@@ -1,0 +1,51 @@
+@use "../utils/tokens";
+
+.alert {
+  --bs-alert-padding-x: 1.125rem;
+  --bs-alert-padding-y: 0.875rem;
+  --bs-alert-border-color: transparent;
+  --bs-alert-border-radius: 0.875rem;
+  font-size: 0.9375rem;
+}
+
+.alert-info {
+  --bs-alert-color: var(--bs-body-color);
+  --bs-alert-bg: var(--bs-tertiary-bg);
+}
+
+.alert-danger {
+  --bs-alert-color: var(--adikara-red-text);
+  --bs-alert-bg: #{rgba(tokens.$adikara-red, 0.08)};
+}
+
+.alert-success {
+  --bs-alert-color: #0f8a3c;
+  --bs-alert-bg: #{rgba(#00d140, 0.1)};
+}
+
+.alert-warning {
+  --bs-alert-color: #{tokens.$adikara-orange-text};
+  --bs-alert-bg: #{rgba(tokens.$adikara-orange-text, 0.1)};
+}
+
+[data-bs-theme="dark"] .alert-success {
+  --bs-alert-color: #4ade80;
+}
+
+.alert-dismissible .btn-close {
+  padding: calc(var(--bs-alert-padding-y) + 0.125rem) var(--bs-alert-padding-x);
+  transform: scale(0.8);
+}
+
+.ctfdio-email-nudge {
+  --bs-alert-color: var(--bs-body-color);
+  --bs-alert-bg: var(--adikara-surface);
+  --bs-alert-border-radius: 1rem;
+  border: 1px solid var(--adikara-card-border);
+  box-shadow: 0 14px 44px rgba(tokens.$adikara-navy, 0.14);
+
+  a {
+    font-weight: 600;
+    color: var(--adikara-red-text);
+  }
+}

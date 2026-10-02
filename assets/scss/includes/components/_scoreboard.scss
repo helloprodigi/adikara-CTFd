@@ -240,7 +240,7 @@
   bottom: 0;
   z-index: 10;
   margin-top: 2.5rem;
-  padding: 1.25rem 0;
+  padding: 0.5rem 0;
 
   &::before {
     content: "";
@@ -250,14 +250,18 @@
     bottom: 0;
     left: calc(50% - 50vw);
     z-index: -1;
-    background: tokens.$adikara-mine-gradient;
+    background: var(--adikara-mine-bg);
+    border-top: 1px solid var(--adikara-card-border);
+    box-shadow: 0 -10px 30px var(--adikara-card-shadow);
   }
 
   .scoreboard-row {
-    max-width: 66rem;
+    max-width: 64rem;
     margin: 0 auto;
+    background: transparent;
     border-color: transparent;
-    box-shadow: 0 10px 30px rgba(tokens.$adikara-navy, 0.15);
+    box-shadow: none;
+    transform: none;
   }
 }
 

@@ -136,17 +136,10 @@ $hero-ease: cubic-bezier(0.16, 1, 0.3, 1);
     height: 2.5rem;
     animation: heroRise 0.65s $hero-ease 0.8s both;
 
-    &:last-child {
+    &:nth-child(n + 3) {
       animation-delay: 1s;
     }
   }
-}
-
-[data-bs-theme="dark"] .hero-partners img {
-  box-sizing: content-box;
-  padding: 0.375rem 0.75rem;
-  background-color: #fff;
-  border-radius: 0.625rem;
 }
 
 .hero-icon {

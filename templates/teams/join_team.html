@@ -1,34 +1,3 @@
-{% extends "base.html" %}
+{% extends "teams/team_enrollment.html" %}
 
-{% block content %}
-  <div class="jumbotron">
-    <div class="container">
-      <p class="jumbotron-eyebrow">
-        {% trans %}Team{% endtrans %}
-      </p>
-      <h1>{% trans %}Join Team{% endtrans %}</h1>
-    </div>
-  </div>
-  <div class="container">
-    <div class="team-card">
-      {% include "components/errors.html" %}
-
-      {% with form = Forms.teams.TeamJoinForm() %}
-        <form method="POST">
-          <div class="mb-3">
-            {{ form.name.label(class="form-label") }}
-            {{ form.name(class="form-control") }}
-          </div>
-
-          <div class="mb-4">
-            {{ form.password.label(class="form-label") }}
-            {{ form.password(class="form-control") }}
-          </div>
-
-          {{ form.submit(class="btn btn-primary w-100") }}
-          {{ form.nonce() }}
-        </form>
-      {% endwith %}
-    </div>
-  </div>
-{% endblock %}
+{% set open_modal = "join" %}
