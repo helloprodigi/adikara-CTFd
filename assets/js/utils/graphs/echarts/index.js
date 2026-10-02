@@ -32,13 +32,29 @@ echarts.use([
   CanvasRenderer,
 ]);
 
-export function embed(target, option) {
-  let chart = echarts.init(target);
+function render(target, option) {
+  const theme =
+    document.documentElement.getAttribute("data-bs-theme") === "dark" ? "dark" : null;
+  const chart = echarts.init(target, theme);
 
   // https://echarts.apache.org/en/api.html#echartsInstance.setOption
   // https://github.com/apache/echarts/issues/6202#issuecomment-315054637
   // https://stackoverflow.com/a/72211534
-  chart.setOption(option, true);
+  chart.setOption({ backgroundColor: "transparent", ...option }, true);
+
+  return chart;
+}
+
+export function embed(target, option) {
+  let chart = render(target, option);
+
+  new MutationObserver(() => {
+    chart.dispose();
+    chart = render(target, option);
+  }).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-bs-theme"],
+  });
 
   window.addEventListener("resize", () => {
     if (chart) {

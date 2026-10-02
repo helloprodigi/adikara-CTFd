@@ -35,7 +35,7 @@
   padding: 0.125rem 0.625rem;
   font-size: 0.75rem;
   font-weight: 600;
-  color: tokens.$adikara-red;
+  color: var(--adikara-red-text);
   background-color: rgba(tokens.$adikara-red, 0.08);
   border-radius: 999px;
 }
@@ -48,10 +48,10 @@
   overflow: hidden;
   color: var(--bs-body-color);
   text-align: left;
-  background-color: var(--bs-body-bg);
+  background-color: var(--adikara-surface);
   border: 1px solid rgba(tokens.$adikara-red, 0.15);
   border-radius: 1rem;
-  box-shadow: 0 5px 14px rgba(tokens.$adikara-navy, 0.04);
+  box-shadow: 0 5px 14px var(--adikara-card-shadow);
   transition:
     transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.22s ease-in-out,
@@ -85,7 +85,7 @@
   &.challenge-solved {
     border-color: transparent;
     background:
-      linear-gradient(var(--bs-body-bg), var(--bs-body-bg)) padding-box,
+      linear-gradient(var(--adikara-surface), var(--adikara-surface)) padding-box,
       tokens.$adikara-border-gradient border-box;
   }
 }
@@ -132,7 +132,7 @@
 .challenge-card-points strong {
   font-size: 1.5rem;
   line-height: 1;
-  color: tokens.$adikara-red;
+  color: var(--adikara-red-text);
 }
 
 .challenge-card-check {
@@ -224,7 +224,7 @@
 }
 
 .challenge-value {
-  color: tokens.$adikara-red;
+  color: var(--adikara-red-text);
   background-color: rgba(tokens.$adikara-red, 0.08);
 
   strong {
@@ -243,7 +243,7 @@
   --bs-nav-link-padding-y: 0.375rem;
   --bs-nav-link-font-size: 0.875rem;
   --bs-nav-link-color: var(--bs-secondary-color);
-  --bs-nav-link-hover-color: #{tokens.$adikara-red};
+  --bs-nav-link-hover-color: var(--adikara-red-text);
   gap: 0.25rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
@@ -294,7 +294,7 @@
     }
 
     i {
-      color: tokens.$adikara-red;
+      color: var(--adikara-red-text);
     }
   }
 
@@ -309,8 +309,8 @@
   border: 1px dashed rgba(tokens.$adikara-red, 0.3);
 
   &:hover {
-    color: tokens.$adikara-red;
-    border-color: tokens.$adikara-red;
+    color: var(--adikara-red-text);
+    border-color: var(--adikara-red-text);
   }
 }
 

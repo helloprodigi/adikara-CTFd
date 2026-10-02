@@ -3,10 +3,10 @@
 .adikara-navbar {
   --bs-navbar-padding-y: 0.75rem;
   --bs-navbar-color: var(--bs-body-color);
-  --bs-navbar-hover-color: #{tokens.$adikara-red};
-  --bs-navbar-active-color: #{tokens.$adikara-red};
+  --bs-navbar-hover-color: var(--adikara-red-text);
+  --bs-navbar-active-color: var(--adikara-red-text);
   --bs-navbar-toggler-border-color: transparent;
-  background-color: var(--bs-body-bg);
+  background-color: var(--adikara-surface);
   border-bottom: 1px solid var(--bs-border-color-translucent);
 
   .navbar-logo {
@@ -45,8 +45,75 @@
   &:hover,
   &:focus-visible,
   &[aria-expanded="true"] {
-    color: tokens.$adikara-red;
+    color: var(--adikara-red-text);
     background-color: var(--bs-tertiary-bg);
+  }
+}
+
+.adikara-icon {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+.navbar-action .adikara-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  stroke-width: 1.75;
+}
+
+.navbar-chevron {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--bs-secondary-color);
+}
+
+.adikara-navbar .dropdown-item {
+  display: flex;
+  align-items: center;
+
+  .adikara-icon {
+    width: 1rem;
+    height: 1rem;
+    stroke-width: 1.75;
+  }
+}
+
+.navbar-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 6.5rem;
+  height: 2.5rem;
+  padding: 0 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 999px;
+  transition:
+    background-color 0.16s ease-in-out,
+    color 0.16s ease-in-out,
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.22s ease-in-out;
+
+  &.btn-primary {
+    box-shadow: 0 4px 14px -6px rgba(tokens.$adikara-red, 0.4);
+
+    &:hover,
+    &:focus-visible {
+      background-color: tokens.$adikara-dark-red;
+      border-color: tokens.$adikara-dark-red;
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    box-shadow: 0 12px 30px -10px rgba(tokens.$adikara-red, 0.55);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.97);
   }
 }
 

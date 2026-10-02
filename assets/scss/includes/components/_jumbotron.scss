@@ -10,7 +10,7 @@
   h1 {
     margin-bottom: 0;
     font-size: clamp(2rem, 4vw, 2.75rem);
-    color: tokens.$adikara-navy;
+    color: var(--bs-body-color);
   }
 }
 

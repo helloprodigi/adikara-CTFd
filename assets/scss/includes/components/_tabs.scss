@@ -33,7 +33,7 @@
 
   &:hover,
   &:focus-visible {
-    color: tokens.$adikara-red;
+    color: var(--adikara-red-text);
   }
 
   &.active {

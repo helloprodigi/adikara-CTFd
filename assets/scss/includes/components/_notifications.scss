@@ -8,14 +8,14 @@
   width: 2rem;
   height: 2rem;
   font-size: 0.875rem;
-  color: tokens.$adikara-red;
+  color: var(--adikara-red-text);
   background-color: rgba(tokens.$adikara-red, 0.1);
   border-radius: 50%;
 }
 
 .notification-toast {
-  --bs-toast-bg: var(--bs-body-bg);
-  --bs-toast-header-bg: var(--bs-body-bg);
+  --bs-toast-bg: var(--adikara-surface);
+  --bs-toast-header-bg: var(--adikara-surface);
   overflow: hidden;
   border: 0;
   border-radius: 0.75rem;
@@ -45,10 +45,10 @@
 }
 
 .notification-card {
-  background-color: var(--bs-body-bg);
-  border: 1px solid rgba(tokens.$adikara-navy, 0.1);
+  background-color: var(--adikara-surface);
+  border: 1px solid var(--adikara-card-border);
   border-radius: 1rem;
-  box-shadow: 0 5px 14px rgba(tokens.$adikara-navy, 0.04);
+  box-shadow: 0 5px 14px var(--adikara-card-shadow);
 
   .card-body {
     padding: 1.5rem 1.75rem;

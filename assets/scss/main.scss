@@ -14,8 +14,18 @@
   $input-bg: var(--bs-tertiary-bg),
   $input-border-color: var(--bs-tertiary-bg),
   $input-btn-padding-y: 0.625rem,
-  $input-btn-padding-x: 1rem
+  $input-btn-padding-x: 1rem,
+  $body-bg-dark: tokens.$adikara-dark-bg,
+  $body-color-dark: tokens.$adikara-dark-text,
+  $body-secondary-color-dark: tokens.$adikara-dark-muted,
+  $body-secondary-bg-dark: tokens.$adikara-dark-surface,
+  $body-tertiary-bg-dark: tokens.$adikara-dark-raised,
+  $border-color-dark: tokens.$adikara-dark-border,
+  $link-color-dark: tokens.$adikara-dark-red-text,
+  $form-select-indicator-color-dark: tokens.$adikara-dark-text
 );
+
+@use "includes/utils/theme";
 
 @use "includes/components/table";
 @use "includes/components/jumbotron";

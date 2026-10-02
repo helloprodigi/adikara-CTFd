@@ -4,10 +4,10 @@
   max-width: 34rem;
   margin: 0 auto 3rem;
   padding: 2rem;
-  background-color: var(--bs-body-bg);
+  background-color: var(--adikara-surface);
   border: 1px solid rgba(tokens.$adikara-red, 0.15);
   border-radius: 1.25rem;
-  box-shadow: 0 8px 24px rgba(tokens.$adikara-navy, 0.04);
+  box-shadow: 0 8px 24px var(--adikara-card-shadow);
 
   .form-label {
     font-size: 0.875rem;
@@ -54,8 +54,8 @@
   gap: 0.5rem;
   padding: 2rem;
   text-align: center;
-  background-color: var(--bs-body-bg);
-  border: 1px solid rgba(tokens.$adikara-navy, 0.08);
+  background-color: var(--adikara-surface);
+  border: 1px solid var(--adikara-card-border);
   border-radius: 1.25rem;
   box-shadow: 0 10px 30px rgba(tokens.$adikara-navy, 0.06);
 
@@ -109,7 +109,7 @@
   i {
     width: 1.5rem;
     font-size: 1.125rem;
-    color: tokens.$adikara-red;
+    color: var(--adikara-red-text);
     text-align: center;
   }
 }

@@ -4,7 +4,7 @@
 .form-control[placeholder]:not(:placeholder-shown) {
   border-color: transparent;
   background:
-    linear-gradient(var(--bs-body-bg), var(--bs-body-bg)) padding-box,
+    linear-gradient(var(--adikara-surface), var(--adikara-surface)) padding-box,
     tokens.$adikara-border-gradient border-box;
   box-shadow: none;
 }
@@ -27,7 +27,7 @@
   &:focus-within,
   &:has(> .form-control[placeholder]:not(:placeholder-shown)) {
     background:
-      linear-gradient(var(--bs-body-bg), var(--bs-body-bg)) padding-box,
+      linear-gradient(var(--adikara-surface), var(--adikara-surface)) padding-box,
       tokens.$adikara-border-gradient border-box;
   }
 }

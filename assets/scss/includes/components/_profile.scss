@@ -27,7 +27,7 @@
   height: 6rem;
   font-size: 2.25rem;
   font-weight: 700;
-  color: tokens.$adikara-red;
+  color: var(--adikara-red-text);
   background-color: #fff;
   border-radius: 1rem;
 }
@@ -162,10 +162,10 @@ a.profile-chip:focus-visible {
 
 .profile-card {
   padding: 1.5rem;
-  background-color: var(--bs-body-bg);
-  border: 1px solid rgba(tokens.$adikara-navy, 0.1);
+  background-color: var(--adikara-surface);
+  border: 1px solid var(--adikara-card-border);
   border-radius: 1rem;
-  box-shadow: 0 5px 14px rgba(tokens.$adikara-navy, 0.04);
+  box-shadow: 0 5px 14px var(--adikara-card-shadow);
 }
 
 .profile-card-title {
@@ -181,7 +181,7 @@ a.profile-chip:focus-visible {
     color: var(--bs-body-color);
 
     &:hover {
-      color: tokens.$adikara-red;
+      color: var(--adikara-red-text);
     }
   }
 }
@@ -189,7 +189,7 @@ a.profile-chip:focus-visible {
 .profile-category-chip {
   padding: 0.25rem 0.625rem;
   font-size: 0.75rem;
-  color: tokens.$adikara-red;
+  color: var(--adikara-red-text);
   background-color: rgba(tokens.$adikara-red, 0.08);
   border-radius: 999px;
 }
@@ -269,7 +269,7 @@ a.profile-chip:focus-visible {
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  color: tokens.$adikara-red;
+  color: var(--adikara-red-text);
   background-color: rgba(tokens.$adikara-red, 0.08);
   border-radius: 50%;
 }
@@ -297,7 +297,7 @@ a.profile-chip:focus-visible {
 
 .profile-award-value {
   font-weight: 700;
-  color: tokens.$adikara-red;
+  color: var(--adikara-red-text);
 }
 
 .profile-empty {

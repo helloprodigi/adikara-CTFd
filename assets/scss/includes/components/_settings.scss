@@ -3,10 +3,10 @@
 .settings-nav {
   gap: 0.25rem;
   padding: 0.5rem;
-  background-color: var(--bs-body-bg);
-  border: 1px solid rgba(tokens.$adikara-navy, 0.1);
+  background-color: var(--adikara-surface);
+  border: 1px solid var(--adikara-card-border);
   border-radius: 1rem;
-  box-shadow: 0 5px 14px rgba(tokens.$adikara-navy, 0.04);
+  box-shadow: 0 5px 14px var(--adikara-card-shadow);
 
   .nav-link {
     padding: 0.75rem 1.25rem;
@@ -20,7 +20,7 @@
 
     &:hover,
     &:focus-visible {
-      color: tokens.$adikara-red;
+      color: var(--adikara-red-text);
       background-color: rgba(tokens.$adikara-red, 0.05);
     }
 
@@ -36,10 +36,10 @@
   display: flow-root;
   margin-bottom: 3rem;
   padding: 2rem;
-  background-color: var(--bs-body-bg);
-  border: 1px solid rgba(tokens.$adikara-navy, 0.1);
+  background-color: var(--adikara-surface);
+  border: 1px solid var(--adikara-card-border);
   border-radius: 1.25rem;
-  box-shadow: 0 8px 24px rgba(tokens.$adikara-navy, 0.04);
+  box-shadow: 0 8px 24px var(--adikara-card-shadow);
 
   hr {
     margin: 1.75rem 0;
@@ -70,7 +70,7 @@
 
   &:hover,
   &:focus-visible {
-    color: tokens.$adikara-red;
+    color: var(--adikara-red-text);
     background-color: rgba(tokens.$adikara-red, 0.08);
   }
 }

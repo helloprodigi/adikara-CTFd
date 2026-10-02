@@ -10,7 +10,7 @@
   h1 {
     margin-bottom: 0.25rem;
     font-size: clamp(2rem, 5vw, 3.25rem);
-    color: tokens.$adikara-navy;
+    color: var(--bs-body-color);
     overflow-wrap: anywhere;
   }
 

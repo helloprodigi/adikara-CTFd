@@ -1,3 +1,4 @@
+{% from "components/icons.html" import icon %}
 <nav class="navbar navbar-expand-lg sticky-top adikara-navbar">
   <div class="container">
     <a href="{{ url_for('views.static_html', route='/') }}" class="navbar-brand">
@@ -10,8 +11,13 @@
         >
       {% else %}
         <img
-            class="navbar-logo d-none d-sm-inline"
+            class="navbar-logo d-none d-sm-inline theme-light-only"
             src="{{ url_for('views.themes', path='img/adikara/adikara-logo.svg') }}"
+            alt="{{ Configs.ctf_name }}"
+        >
+        <img
+            class="navbar-logo d-none d-sm-inline theme-dark-only"
+            src="{{ url_for('views.themes', path='img/adikara/adikara-logo-dark.svg') }}"
             alt="{{ Configs.ctf_name }}"
         >
         <img
@@ -25,31 +31,14 @@
     <div class="d-flex align-items-center gap-1 order-lg-last">
       {% if authed() %}
         <a class="navbar-action" href="{{ url_for('views.notifications') }}" aria-label="{% trans %}Notifications{% endtrans %}">
-          <i class="fas fa-bell"></i>
+          {{ icon("bell") }}
           <span x-data x-show="$store.unread_count > 0" x-text="$store.unread_count" class="badge rounded-pill bg-primary navbar-badge"></span>
         </a>
       {% endif %}
 
-      <div class="dropdown">
-        <button class="navbar-action" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{% trans %}Change language{% endtrans %}">
-          <i class="fas fa-language"></i>
-        </button>
-        <form x-data="LanguageForm">
-          <ul class="dropdown-menu dropdown-menu-end">
-            {% set curr_lang = get_locale() %}
-            {%- for lang in Languages.names.items() %}
-            <li>
-                <span class="dropdown-item {{ 'active' if (curr_lang == lang[0]) }}" @click="set" value="{{ lang[0] }}">
-                  {{ lang[1] }}
-                </span>
-            </li>
-            {%- endfor %}
-          </ul>
-        </form>
-      </div>
-
       <button class="navbar-action theme-switch" type="button" aria-label="{% trans %}Toggle theme{% endtrans %}">
-        <i class="fas fa-sun"></i>
+        {{ icon("sun", "theme-light-only") }}
+        {{ icon("moon", "theme-dark-only") }}
       </button>
 
       {% if authed() %}
@@ -61,13 +50,13 @@
             <span class="d-none d-md-inline text-truncate">
               {{ User.name }}
             </span>
-            <i class="fas fa-chevron-down small"></i>
+            {{ icon("chevron-down", "navbar-chevron") }}
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             {% if is_admin() %}
               <li>
                 <a class="dropdown-item" href="{{ url_for('admin.view') }}">
-                  <i class="fas fa-wrench fa-fw me-2"></i>
+                  {{ icon("wrench", "me-2") }}
                   {% trans %}Admin Panel{% endtrans %}
                 </a>
               </li>
@@ -77,7 +66,7 @@
             {% if Configs.user_mode == "teams" %}
               <li>
                 <a class="dropdown-item" href="{{ url_for('teams.private') }}">
-                  <i class="fas fa-users fa-fw me-2"></i>
+                  {{ icon("users", "me-2") }}
                   {% trans %}Team{% endtrans %}
                 </a>
               </li>
@@ -85,14 +74,14 @@
 
             <li>
               <a class="dropdown-item" href="{{ url_for('users.private') }}">
-                <i class="fas fa-user-circle fa-fw me-2"></i>
+                {{ icon("user", "me-2") }}
                 {% trans %}Profile{% endtrans %}
               </a>
             </li>
 
             <li>
               <a class="dropdown-item" href="{{ url_for('views.settings') }}">
-                <i class="fas fa-cogs fa-fw me-2"></i>
+                {{ icon("settings", "me-2") }}
                 {% trans %}Settings{% endtrans %}
               </a>
             </li>
@@ -101,19 +90,19 @@
 
             <li>
               <a class="dropdown-item text-primary" href="{{ url_for('auth.logout') }}">
-                <i class="fas fa-sign-out-alt fa-fw me-2"></i>
+                {{ icon("log-out", "me-2") }}
                 {% trans %}Logout{% endtrans %}
               </a>
             </li>
           </ul>
         </div>
       {% else %}
-        <a class="btn btn-link d-none d-sm-inline-block" href="{{ url_for('auth.login') }}">
+        <a class="btn btn-outline-primary navbar-cta d-none d-sm-inline-flex" href="{{ url_for('auth.login') }}">
           {% trans %}Login{% endtrans %}
         </a>
 
         {% if registration_visible() %}
-          <a class="btn btn-primary btn-sm" href="{{ url_for('auth.register') }}">
+          <a class="btn btn-primary navbar-cta" href="{{ url_for('auth.register') }}">
             {% trans %}Register{% endtrans %}
           </a>
         {% endif %}

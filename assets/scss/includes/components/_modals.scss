@@ -1,5 +1,9 @@
 @use "../utils/tokens";
 
+.modal-content {
+  --bs-modal-bg: var(--adikara-surface);
+}
+
 .modal-content:not(.challenge-modal) {
   padding: 0.5rem 0.75rem;
   border: 0;
@@ -38,7 +42,7 @@
 :where(.modal-content:not(.challenge-modal)) {
   .form-control,
   .form-select {
-    background-color: var(--bs-body-bg);
+    background-color: var(--adikara-surface);
     border-color: var(--bs-border-color);
   }
 }
