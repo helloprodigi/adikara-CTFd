@@ -196,20 +196,32 @@ $hero-ease: cubic-bezier(0.16, 1, 0.3, 1);
 
 @media (max-width: 767.98px) {
   .hero {
-    --hero-decor-width: min(30vw, 150px);
-    --hero-decor-opacity: 0.25;
-    min-height: auto;
-    padding: 2.5rem 0 3rem;
+    --hero-decor-width: min(30vw, 160px);
+    padding: 2rem 0 3rem;
 
-    &::before,
-    &::after {
-      top: 1.5rem;
-      margin-top: 0;
+    &::before {
+      left: -1.25rem;
     }
+
+    &::after {
+      right: -1.25rem;
+    }
+  }
+
+  .hero-content {
+    gap: 1.25rem;
   }
 
   .hero-partners img {
     height: 2rem;
+  }
+
+  .hero-icon {
+    height: 8rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.375rem, 12vw, 3.5rem);
   }
 }
 

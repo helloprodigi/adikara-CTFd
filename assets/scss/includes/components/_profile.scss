@@ -1,21 +1,55 @@
 @use "../utils/tokens";
 
 .profile-banner {
+  position: relative;
+  isolation: isolate;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 1.5rem 2rem;
   margin: 2rem 0;
-  padding: 2rem 2.25rem;
+  padding: 1.75rem 4.5rem 1.75rem 1.25rem;
+  overflow: hidden;
   color: #fff;
-  background: linear-gradient(
-    100deg,
-    tokens.$adikara-red 0%,
-    tokens.$adikara-bright-red 45%,
-    #f36b0a 100%
-  );
+  background:
+    var(--profile-pattern) center / 520px auto,
+    linear-gradient(
+      100deg,
+      tokens.$adikara-red 0%,
+      tokens.$adikara-bright-red 45%,
+      #f36b0a 100%
+    );
   border-radius: 1.25rem;
   box-shadow: 0 16px 40px -18px rgba(tokens.$adikara-red, 0.6);
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    display: none;
+    background-color: var(--bs-body-bg);
+    pointer-events: none;
+  }
+
+  &::before {
+    left: 0;
+    aspect-ratio: 650 / 443;
+    -webkit-mask: var(--profile-ornament-left) no-repeat left center / 100% 100%;
+    mask: var(--profile-ornament-left) no-repeat left center / 100% 100%;
+  }
+
+  &::after {
+    top: auto;
+    right: 0;
+    display: block;
+    height: 9rem;
+    aspect-ratio: 282 / 443;
+    -webkit-mask: var(--profile-ornament-right) no-repeat right center / 100% 100%;
+    mask: var(--profile-ornament-right) no-repeat right center / 100% 100%;
+  }
 }
 
 .profile-avatar {
@@ -27,7 +61,7 @@
   height: 6rem;
   font-size: 2.25rem;
   font-weight: 700;
-  color: var(--adikara-red-text);
+  color: tokens.$adikara-red;
   background-color: #fff;
   border-radius: 1rem;
 }
@@ -314,6 +348,24 @@ a.profile-chip:focus-visible {
   }
 }
 
+@media (min-width: 992px) {
+  .profile-banner {
+    flex-wrap: nowrap;
+    min-height: 13rem;
+    padding: 2rem 6rem 2rem 8rem;
+    border-radius: 1.75rem;
+
+    &::before {
+      display: block;
+    }
+
+    &::after {
+      top: 0;
+      height: auto;
+    }
+  }
+}
+
 @media (max-width: 991.98px) {
   .profile-layout {
     grid-template-columns: 1fr;
@@ -321,10 +373,6 @@ a.profile-chip:focus-visible {
 }
 
 @media (max-width: 575.98px) {
-  .profile-banner {
-    padding: 1.5rem;
-  }
-
   .profile-standing div:first-child {
     padding-left: 0;
     border-left: 0;

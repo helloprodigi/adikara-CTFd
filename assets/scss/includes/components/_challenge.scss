@@ -83,10 +83,43 @@
   }
 
   &.challenge-solved {
+    color: #fff;
+    background: linear-gradient(
+      125deg,
+      tokens.$adikara-red 0%,
+      tokens.$adikara-bright-red 45%,
+      tokens.$adikara-orange-text 100%
+    );
     border-color: transparent;
-    background:
-      linear-gradient(var(--adikara-surface), var(--adikara-surface)) padding-box,
-      tokens.$adikara-border-gradient border-box;
+    box-shadow: 0 10px 26px -14px rgba(tokens.$adikara-red, 0.7);
+
+    &::before {
+      filter: brightness(0) invert(1);
+      opacity: 1;
+    }
+
+    &:hover,
+    &:focus-visible {
+      border-color: transparent;
+      box-shadow: 0 16px 34px -12px rgba(tokens.$adikara-red, 0.75);
+    }
+
+    .challenge-card-category,
+    .challenge-card-meta,
+    .challenge-card-points strong {
+      color: #fff;
+    }
+
+    .challenge-card-category,
+    .challenge-card-meta {
+      opacity: 0.85;
+    }
+
+    .challenge-card-check {
+      color: tokens.$adikara-red;
+      background: #fff;
+      box-shadow: 0 4px 10px -2px rgba(#000, 0.25);
+    }
   }
 }
 

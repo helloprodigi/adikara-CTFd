@@ -1,5 +1,8 @@
 <div class="container">
-  <div class="profile-banner">
+  <div
+      class="profile-banner"
+      style="--profile-ornament-left: url('{{ url_for('views.themes', path='img/adikara/profile-ornament-left.svg') }}'); --profile-ornament-right: url('{{ url_for('views.themes', path='img/adikara/profile-ornament-right.svg') }}'); --profile-pattern: url('{{ url_for('views.themes', path='img/adikara/pattern-circle.svg') }}');"
+  >
     <div class="profile-identity">
       {% if is_private %}
         <h1 class="profile-name" id="team-id" team-id="{{ team.id }}">{{ team.name }}</h1>
