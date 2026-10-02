@@ -38,3 +38,50 @@
     color: var(--bs-secondary-color);
   }
 }
+
+.notifications-list {
+  max-width: 56rem;
+  margin-bottom: 3rem;
+}
+
+.notification-card {
+  background-color: var(--bs-body-bg);
+  border: 1px solid rgba(tokens.$adikara-navy, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 5px 14px rgba(tokens.$adikara-navy, 0.04);
+
+  .card-body {
+    padding: 1.5rem 1.75rem;
+  }
+
+  .card-title {
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+  }
+
+  .blockquote {
+    padding-left: 0;
+    font-size: 1rem;
+    color: var(--bs-secondary-color);
+    border-left: 0;
+
+    p {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.notifications-empty {
+  margin-bottom: 2rem;
+  padding: 3.5rem 1rem;
+  text-align: center;
+  color: var(--bs-secondary-color);
+  border: 1px dashed rgba(tokens.$adikara-red, 0.25);
+  border-radius: 1rem;
+
+  h2 {
+    margin: 0;
+    font-size: 1.125rem;
+    color: inherit;
+  }
+}

@@ -1,0 +1,82 @@
+@use "../utils/tokens";
+
+.settings-nav {
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background-color: var(--bs-body-bg);
+  border: 1px solid rgba(tokens.$adikara-navy, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 5px 14px rgba(tokens.$adikara-navy, 0.04);
+
+  .nav-link {
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+    color: var(--bs-secondary-color);
+    text-align: left;
+    border-radius: 0.75rem;
+    transition:
+      color 0.18s ease-in-out,
+      background-color 0.18s ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+      color: tokens.$adikara-red;
+      background-color: rgba(tokens.$adikara-red, 0.05);
+    }
+
+    &.active {
+      color: #fff;
+      background: tokens.$adikara-tab-gradient;
+      box-shadow: 0 6px 16px -8px rgba(tokens.$adikara-red, 0.6);
+    }
+  }
+}
+
+.settings-card {
+  display: flow-root;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background-color: var(--bs-body-bg);
+  border: 1px solid rgba(tokens.$adikara-navy, 0.1);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 24px rgba(tokens.$adikara-navy, 0.04);
+
+  hr {
+    margin: 1.75rem 0;
+    border-color: var(--bs-border-color);
+    opacity: 1;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+
+  .table {
+    margin-bottom: 0;
+  }
+}
+
+.delete-token {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--bs-secondary-color);
+  border-radius: 50%;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+
+  &:hover,
+  &:focus-visible {
+    color: tokens.$adikara-red;
+    background-color: rgba(tokens.$adikara-red, 0.08);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .settings-card {
+    padding: 1.5rem;
+  }
+}
