@@ -177,6 +177,32 @@
               </div>
             {% endif %}
 
+            <div class="challenge-proof">
+              <div class="mb-3">
+                <label class="form-label" for="ai-links">
+                  {% trans %}AI Chat Link{% endtrans %}<span class="challenge-proof-required">*</span>
+                </label>
+                <input
+                    id="ai-links" class="form-control" type="text" name="ai-links"
+                    placeholder="https://chatgpt.com/share/..."
+                >
+                <small class="form-text">
+                  {% trans %}An AI chat link is required. If you did not use AI, write:{% endtrans %}
+                  <code>{% trans %}I did not use AI{% endtrans %}</code>
+                </small>
+              </div>
+
+              <div>
+                <label class="form-label" for="solver">
+                  {% trans %}Solver{% endtrans %}<span class="challenge-proof-required">*</span>
+                </label>
+                <input id="solver" class="form-control" type="file" name="solver">
+                <small class="form-text">
+                  {% trans %}Max 1024 KB. If you did not use a solver, upload a .txt file containing "I did not use a solver".{% endtrans %}
+                </small>
+              </div>
+            </div>
+
             <template x-if="max_attempts > 0">
               <p class="challenge-attempts">
                 <i class="fas fa-redo-alt me-1"></i>
